@@ -1,0 +1,42 @@
+{
+	"folders": {},
+	"connections": {
+		"azure-1974199501e-80b3f1910f8479a": {
+			"provider": "sqlserver",
+			"driver": "azure",
+			"name": "1_repsys1",
+			"save-password": true,
+			"configuration": {
+				"host": "repsys1.database.windows.net",
+				"database": "repsys1",
+				"url": "jdbc:sqlserver://;serverName\u003drepsys1.database.windows.net;databaseName\u003drepsys1;encrypt\u003dtrue",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": false,
+				"provider-properties": {
+					"@dbeaver-authentication@": "SQL_SERVER_PASSWORD",
+					"@dbeaver-show-all-schemas@": "false",
+					"show-all-databases-azure": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": true,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}

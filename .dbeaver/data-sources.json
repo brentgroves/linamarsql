@@ -1,0 +1,63 @@
+{
+	"folders": {},
+	"connections": {
+		"azure-1974199501e-80b3f1910f8479a": {
+			"provider": "sqlserver",
+			"driver": "azure",
+			"name": "1_repsys1",
+			"save-password": true,
+			"configuration": {
+				"host": "repsys1.database.windows.net",
+				"database": "repsys1",
+				"url": "jdbc:sqlserver://;serverName\u003drepsys1.database.windows.net;databaseName\u003drepsys1;encrypt\u003dtrue",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": false,
+				"provider-properties": {
+					"@dbeaver-authentication@": "SQL_SERVER_PASSWORD",
+					"@dbeaver-show-all-schemas@": "false",
+					"show-all-databases-azure": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		},
+		"microsoft-197419983ca-69c5b823a74d9557": {
+			"provider": "sqlserver",
+			"driver": "microsoft",
+			"name": "1_mgdw-mgsqlmi",
+			"save-password": true,
+			"configuration": {
+				"host": "mgsqlmi.public.48d444e7f69b.database.windows.net",
+				"port": "3342",
+				"database": "mgdw",
+				"url": "jdbc:sqlserver://;serverName\u003dmgsqlmi.public.48d444e7f69b.database.windows.net;port\u003d3342;databaseName\u003dmgdw",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": false,
+				"provider-properties": {
+					"@dbeaver-authentication@": "SQL_SERVER_PASSWORD",
+					"@dbeaver-show-all-schemas@": "false",
+					"sslTrustServerCertificate": "false"
+				},
+				"auth-model": "sqlserver_database"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": true,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}
