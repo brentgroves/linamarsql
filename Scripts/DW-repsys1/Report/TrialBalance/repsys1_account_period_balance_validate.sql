@@ -14,13 +14,19 @@ select top 10 *
 --select count(*) cnt 
 from Archive.account_activity_summary_12_03_24 -- 156,166
 
+select sh.*
+--delete
+from ETL.script_history  
+where start_time between '2025-06-07 02:30:00' and '2025-06-08 00:00:00' 
+order by start_time desc
+
 select s.Name, sh.*
 from ETL.script_history sh 
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-05 00:00:00' and '2025-06-06 00:00:00' 
+and start_time between '2025-06-07 12:00:00' and '2025-06-08 00:00:00' 
 order by start_time desc
 
 
@@ -34,11 +40,11 @@ is a revenue/expense to determine whether to reset YTD values to 0 for every yea
 select top 10 *
 --select count(*) 
 from Plex.accounting_account_year_category_type aayct  
-where pcn = 123681 -- 33,410
+where pcn = 123681 -- 33,476 | 33,410
 -- and year = 2026 -- 4916 | 4897  
- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
---and year = 2024 -- 4984
---and year = 2023 -- 4894 
+-- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
+and year = 2024 -- 4916 | 4984
+and year = 2023 -- 4894 
  and aayct.revenue_or_expense = 1
 
 --accounting_year_category_type_count says 4,893 the day after I ran the scripts and got 4,885
@@ -144,13 +150,13 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-04 00:00:00' and '2025-06-05 00:00:00' 
+and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
 order by script_history_key desc
 
 select top 10 * 
 -- select count(*) 
 from Plex.accounting_account  -- 19,827/19,286,19,176
-where pcn=123681 -- 4916 on 6/2/25 | 4910 on 4/2/25 a little later | 4908 on 04/02/25 | 4,897 on 02/04/25 | 4,894 on 12/05/24 | 4,893 on 12/04/24 ### 4,885 on 12/3/24 ### 4,642 3 accounts were added on July 5th, 2024# 4,639 1 account added on Jun 2024 /4,638/4,622/4,621/4,617
+where pcn=123681 -- 4916 on 6/7/25 | 4984
 --where account_no = '10110-000-00000'
 --accounting_account_DW_count = 4893 on 12/3/24
 |account_no    |
@@ -171,14 +177,24 @@ We keep 2 records for each period. Ordinal 1 containss the most current informat
 Note:   This script converts Plex format to datetime with 3 precision second decimal
 If DW column was datetime2 no conversion would be necessary
 */
+
+select s.Name, sh.*
+from ETL.script_history sh 
+join ETL.script s 
+on sh.script_key=s.Script_Key 
+--where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
+ where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
+and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
+order by start_time desc
+
 select top 10 *
 -- select count(*)
 from Plex.accounting_period p  -- 2080 | 2,032
-where pcn = 123681 --  1180 on 4/2/25 | 1180 on 3/4/25 | 1156 on 2/4/25 | 1,132/1084/1060/1036
-and ordinal = 0  -- 566 
-and ordinal = 1 -- 566
+where pcn = 123681 --  1132
+--and ordinal = 0  -- 590 | 566
+and ordinal = 1 -- 590 | 566
 --and period > 202101 -- 718/694/670
-and period between 202410 and 202410
+and period between 202401 and 202412
 
 --Noticed that period 202410 was updated on 2024-11-19 and that explained why some account balances had 
 --different values than the ones showing in the DW which were last updated early in Nov.
@@ -212,7 +228,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-04 00:00:00' and '2025-06-05 00:00:00' 
+and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
 order by start_time desc
 
 /*
