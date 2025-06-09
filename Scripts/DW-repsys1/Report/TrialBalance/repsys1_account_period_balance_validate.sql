@@ -1,3 +1,51 @@
+-- select top 10 *
+-- select count(*)
+from Plex.account_period_balance -- 318,504 / 305,544 on 12/03/24
+--order by pcn,period desc
+where pcn = 123681 -- 255,354 on 6/4/25 | 250,360 on 5/2/25 | 245,450 on 4/3/25 | 235,474 before 3/4/25 | 230,538 before 2/4/25 | 225,644 on Dec 6,2024 | 220,506 on Dec 5,2024 | 217,578 on Dec 4,2024
+and period = 202501 -- 4,894 
+--and period = 202412 -- 4,894 
+--and period = 202404 -- 4,894 
+--and period = 202401 -- 4,894 
+and period = 202311 -- 4,894 
+and period = 202310 -- 4,650 
+
+--and period = 202504 -- 4,916 
+--and period = 202503 -- 4,916 |4,910 
+--and period = 202502 -- 4,916 |4,910 
+--and period = 202406 -- 4,916 |4,910 | 4,897 | 4,894 before 2/4/25
+--and period = 202405 -- 4,916 |4,910 | 4,897 | 4,894 before 2/4/25
+--and period = 202404 -- 4,910 | 4,897 | 4,894 before 2/4/25
+--and account_no in ('12450-000-0000','77300-850-0055','90300-850-0000')  -- new account
+and period between 202405 and 202504  -- 58,992
+and period between 202405 and 202503  -- 54,076 | 54,010
+and period between 202404 and 202503  -- 58,920
+and period between 202404 and 202502  -- 54,010
+and period between 202403 and 202502  -- 58,920
+and period between 202403 and 202501  -- 54,010
+and period between 202403 and 202412  -- 49,080 | 48,970 before 4/2/25 | 48,940 before 2/4/25
+and period between 202402 and 202411  -- 48,970 | 48,940 before 2/4/25
+and period between 202312 and 202410  -- 53,834 (12/06/24) | 51,150 (12/03/24)
+and period between 202311 --4650
+
+select top 10 *
+--select count(*) 
+from Plex.accounting_account_year_category_type aayct  
+where pcn = 123681 -- 33,476 | 33,410
+-- and year = 2026 -- 4916 | 4897  
+-- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
+and year = 2024 -- 4916 | 4984
+and year = 2023 -- 4894 
+
+
+select top 10 s.Name, sh.*
+from ETL.script_history sh 
+join ETL.script s 
+on sh.script_key=s.Script_Key 
+where sh.script_key in (117)
+order by start_time desc
+
+
 --There were over 200 new accounts added this period, 12/3/24
 /*
  * Backup tables
@@ -14,10 +62,9 @@ select top 10 *
 --select count(*) cnt 
 from Archive.account_activity_summary_12_03_24 -- 156,166
 
-select sh.*
 --delete
 from ETL.script_history  
-where start_time between '2025-06-07 02:30:00' and '2025-06-08 00:00:00' 
+where start_time between '2025-06-09 02:30:00' and '2025-06-10 00:00:00' 
 order by start_time desc
 
 select s.Name, sh.*
@@ -25,8 +72,8 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
- where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-07 12:00:00' and '2025-06-08 00:00:00' 
+where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
+and start_time between '2025-06-09 02:30:00' and '2025-06-10 00:00:00' 
 order by start_time desc
 
 
@@ -41,8 +88,8 @@ select top 10 *
 --select count(*) 
 from Plex.accounting_account_year_category_type aayct  
 where pcn = 123681 -- 33,476 | 33,410
--- and year = 2026 -- 4916 | 4897  
--- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
+ and year = 2026 -- 4916 | 4897  
+ and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
 and year = 2024 -- 4916 | 4984
 and year = 2023 -- 4894 
  and aayct.revenue_or_expense = 1
@@ -150,7 +197,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
+and start_time between '2025-06-09 02:30:00' and '2025-06-10 00:00:00' 
 order by script_history_key desc
 
 select top 10 * 
@@ -184,13 +231,13 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
+and start_time between '2025-06-09 02:30:00' and '2025-06-10 00:00:00' 
 order by start_time desc
 
 select top 10 *
 -- select count(*)
 from Plex.accounting_period p  -- 2080 | 2,032
-where pcn = 123681 --  1132
+where pcn = 123681 --  1180 | 1132
 --and ordinal = 0  -- 590 | 566
 and ordinal = 1 -- 590 | 566
 --and period > 202101 -- 718/694/670
@@ -219,7 +266,12 @@ where pcn = 123681
 
 |id   |pcn    |start_period|end_period|start_open_period|end_open_period|no_update|
 |-----|-------|------------|----------|-----------------|---------------|---------|
-|1,739|123,681|202,406     |202,504   |202,505          |202,506        |0        |
+|1,720|123,681|202,406     |202,504   |202,505          |202,506        |0        |
+
+--# backup state
+|id   |pcn    |start_period|end_period|start_open_period|end_open_period|no_update|
+|-----|-------|------------|----------|-----------------|---------------|---------|
+|1,719|123,681|202,401     |202,410   |202,411          |202,501        |0        |
 
 
 select s.Name, sh.*
@@ -228,7 +280,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-07 18:00:00' and '2025-06-08 00:00:00' 
+and start_time between '2025-06-09 02:30:00' and '2025-06-10 00:00:00' 
 order by start_time desc
 
 /*
@@ -485,6 +537,9 @@ select distinct pcn,period
 from Plex.account_period_balance -- 318,504 / 305,544 on 12/03/24
 --order by pcn,period desc
 where pcn = 123681 -- 255,354 on 6/4/25 | 250,360 on 5/2/25 | 245,450 on 4/3/25 | 235,474 before 3/4/25 | 230,538 before 2/4/25 | 225,644 on Dec 6,2024 | 220,506 on Dec 5,2024 | 217,578 on Dec 4,2024
+and period = 202404 -- 4,894 
+and period = 202401 -- 4,894 
+
 --and period = 202504 -- 4,916 
 --and period = 202503 -- 4,916 |4,910 
 --and period = 202502 -- 4,916 |4,910 
