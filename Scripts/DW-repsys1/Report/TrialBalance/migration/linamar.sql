@@ -1,3 +1,19 @@
+create procedure Plex.accounting_balance_delete_period_range
+(
+	@pcn int
+)
+as
+begin
+	
+	declare @start_period int;
+	declare @end_period int;
+	select @start_period=start_period,@end_period=end_period 
+	from Plex.accounting_period_ranges where pcn = @pcn
+--	SELECT @pcn pcn, @start_period start_period, @end_period end_period
+	delete from Plex.accounting_balance WHERE pcn = @pcn and period between @start_period and @end_period	
+end;
+
+
 select *
 from Plex.account_period_balance
 where account_no in ('40060-000-0100','65100-100-0100','68400-000-0100')

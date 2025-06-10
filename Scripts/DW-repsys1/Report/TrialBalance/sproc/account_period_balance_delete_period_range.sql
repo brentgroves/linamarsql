@@ -15,6 +15,7 @@ begin
 	delete from Plex.account_period_balance WHERE pcn = @pcn and period between @start_period and @end_period
 end 
 
+
 select * from Plex.accounting_period_ranges
 
 select * from Plex.account_period_balance ab 
