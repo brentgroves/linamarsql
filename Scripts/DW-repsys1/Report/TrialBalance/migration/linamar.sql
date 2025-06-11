@@ -13,6 +13,35 @@ begin
 	delete from Plex.accounting_balance WHERE pcn = @pcn and period between @start_period and @end_period	
 end;
 
+create procedure Plex.sp_max_fiscal_period
+(
+	@pcn int,
+	@year int,
+	@max_fiscal_period int output
+)
+as 
+BEGIN
+
+WITH fiscal_period(pcn,year,period)
+as
+(
+	select pcn,year(begin_date) year,period 
+	from Plex.accounting_period 
+	where pcn = @pcn
+	and year(begin_date) = @year 
+)
+-- select * from fiscal_period;
+,max_fiscal_period(pcn,year,max_fiscal_period)
+as
+(
+  SELECT pcn,year,max(period) max_fiscal_period
+  FROM fiscal_period
+  group by pcn,[year]
+)
+--select * from max_fiscal_period
+select @max_fiscal_period = max_fiscal_period from max_fiscal_period;
+	
+end;
 
 select *
 from Plex.account_period_balance
