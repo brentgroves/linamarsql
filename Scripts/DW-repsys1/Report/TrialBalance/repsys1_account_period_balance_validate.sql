@@ -66,7 +66,7 @@ select *
 --delete
 from ETL.script_history  
 where script_key = 6
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 select s.Name, sh.*
@@ -75,7 +75,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 
@@ -90,7 +90,8 @@ select top 10 *
 -- select count(*) 
 from Plex.accounting_account_year_category_type aayct  
 where pcn = 123681 -- 33,476 | 33,410
--- and year = 2026 -- 4916 | 4897  
+ and year = 2026 -- 4916 | 4897  
+ and category_type <> 'Asset'
 -- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
 and year = 2024 -- 4916 | 4984
 and year = 2023 -- 4894 
@@ -199,13 +200,14 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by script_history_key desc
 
 select top 10 * 
 -- select count(*) 
 from Plex.accounting_account  -- 19,827/19,286,19,176
 where pcn=123681 -- 4916 on 6/7/25 | 4984
+order by account_no 
 --where account_no = '10110-000-00000'
 --accounting_account_DW_count = 4893 on 12/3/24
 |account_no    |
@@ -233,14 +235,14 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 select top 10 *
 -- select count(*)
 from Plex.accounting_period p  -- 2080 | 2,032
 where pcn = 123681 --  1180 | 1132
---order by p.begin_date desc
+order by p.begin_date desc
 --and ordinal = 0  -- 590 | 566
 and ordinal = 1 -- 590 | 566
 --and period > 202101 -- 718/694/670
@@ -283,7 +285,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 /*
@@ -381,7 +383,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by script_history_key desc
 --if (rec[0][0] = '123681') { "Adult" } else { "Minor" }
 --if (rec[0][2] = '63300-200-0000'):
@@ -458,7 +460,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 select * from Plex.accounting_period_ranges -- 202105/202204
@@ -473,8 +475,10 @@ select top 10 *
 from Plex.account_activity_summary -- 166,441
 where pcn = 123681 -- 144,433 from backup | 164,079|139539|139537|134401/134,401
 --and period = 202506 -- 4,916 
---and period = 202505 -- 4916 | 4,910 
+and period = 202505 -- 4916 | 4,910 
+order by pcn,account_no 
 and period = 202504 -- 0 | 4916 | 4,910 | 4897
+
 --and period = 202503 -- 4,910 | 4,908 | 4897
 --and period = 202502 -- 4,910 | 4,908 | 4897| 0
 --and period = 202501 -- 4897 | 4894
@@ -521,7 +525,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 
@@ -555,7 +559,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-12 00:00:00' and '2025-06-13 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 /*
@@ -624,7 +628,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-11 02:30:00' and '2025-06-12 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-15 00:00:00' 
 order by start_time desc
 
 select count(*) cnt -- 92,093
@@ -644,11 +648,13 @@ where pcn = 123681
 |1,739|123,681|202,406     |202,504   |202,505          |202,506        |0        |
 
 select distinct pcn,period 
--- select top 10 *
+-- select top 200 *
 -- select count(*)
 from Plex.account_period_balance 
 where pcn = 123681 -- 224,644 | 220,506
---and period = 202506 -- 4916
+and period = 202506 -- 4916
+order by account_no   
+
 --and period = 202505 -- 4,916 | 4910
 --and period = 202504 -- 4916 | 4,910
 --and period = 202503 -- 4,910 | 4,908 | 4897 before 4/2/25 | 0
@@ -673,7 +679,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-11 02:30:00' and '2025-06-12 00:00:00' 
+and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
 order by start_time desc
 
 
