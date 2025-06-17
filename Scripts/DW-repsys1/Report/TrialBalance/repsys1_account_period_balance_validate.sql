@@ -591,8 +591,8 @@ where pcn = 123681 -- 230,598 on MI import | 255,354 on 6/4/25 | 250,360 on 5/2/
 --and period = 202409 
 --and period = 202408 
 --and period = 202407 
-and period = 202504 -- 4916
-order by account_no desc  
+--and period = 202504 -- 4916
+--order by account_no desc  
 --and period = 202405 -- 4916 after manually adding accounts from current MI | 4,894 
 --and period = 202404 -- 4910 after manually adding accounts from current MI | 4,894
 --and period = 202403 -- 4910 after manually adding accounts from current MI
@@ -611,8 +611,9 @@ order by account_no desc
 --and account_no in ('12450-000-0000','77300-850-0055','90300-850-0000')  -- new account
 --and period between 202502 and 202504  -- 0
 --and period between 202406 and 202501  -- 39152
-and period between 202406 and 202504  -- 39152
-and period between 202405 and 202504  -- 58,992 | 44,068
+--and period between 202406 and 202504  -- 39152
+--and period between 202405 and 202504  -- 58,992 | 44,068
+and period between 202405 and 202506  -- 58,992 | 44,068
 and period between 202405 and 202503  -- 54,076 | 54,010
 and period between 202404 and 202503  -- 58,920
 and period between 202404 and 202502  -- 54,010
@@ -651,7 +652,7 @@ select distinct pcn,period
 -- select top 200 *
 -- select count(*)
 from Plex.account_period_balance 
-where pcn = 123681 -- 224,644 | 220,506
+where pcn = 123681 -- 255,354
 and period = 202506 -- 4916
 order by account_no   
 
