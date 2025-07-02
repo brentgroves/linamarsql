@@ -65,8 +65,8 @@ from Archive.account_activity_summary_12_03_24 -- 156,166
 select *
 --delete
 from ETL.script_history  
-where script_key = 6
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+--where script_key = 6
+--and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 select s.Name, sh.*
@@ -75,7 +75,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-02 00:00:00' and '2025-07-04 00:00:00' 
 order by start_time desc
 
 
@@ -90,7 +90,7 @@ select top 10 *
 -- select count(*) 
 from Plex.accounting_account_year_category_type aayct  
 where pcn = 123681 -- 33,476 | 33,410
- and year = 2026 -- 4916 | 4897  
+ and year = 2026 -- 4919 | 4916 | 4897  
  and category_type <> 'Asset'
 -- and year = 2025 -- 4916 | 4910 | 4908(04/02/2025)|4897 | 4894 
 and year = 2024 -- 4916 | 4984
@@ -200,7 +200,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+--and start_time between '2025-07-01 00:00:00' and '2025-07-03 00:00:00' 
 order by script_history_key desc
 
 select top 10 * 
@@ -235,7 +235,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-02 00:00:00' and '2025-07-04 00:00:00' 
 order by start_time desc
 
 select top 10 *
@@ -285,7 +285,7 @@ join ETL.script s
 on sh.script_key=s.Script_Key 
 --where sh.script_key in (1,3,4,5,6,7,9,10,11,116)
  where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-02 00:00:00' and '2025-07-04 00:00:00' 
 order by start_time desc
 
 /*
@@ -383,7 +383,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by script_history_key desc
 --if (rec[0][0] = '123681') { "Adult" } else { "Minor" }
 --if (rec[0][2] = '63300-200-0000'):
@@ -460,7 +460,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 select * from Plex.accounting_period_ranges -- 202105/202204
@@ -525,7 +525,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 
@@ -559,7 +559,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 /*
@@ -629,7 +629,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-15 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 select count(*) cnt -- 92,093
@@ -680,7 +680,7 @@ from ETL.script_history sh
 join ETL.script s 
 on sh.script_key=s.Script_Key 
 where sh.script_key in (1,3,4,5,6,7,8,9,10,11,116,117)
-and start_time between '2025-06-13 00:00:00' and '2025-06-14 00:00:00' 
+and start_time between '2025-07-01 00:00:00' and '2025-07-02 00:00:00' 
 order by start_time desc
 
 
