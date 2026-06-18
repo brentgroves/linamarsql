@@ -1,15 +1,6 @@
 Create Schema ETL
 
 
--- DROP TABLE mgdw.ETL.script;
-CREATE TABLE mgdw.ETL.script (
-	script_key int NOT NULL,
-	script_type_key int null,
-	name varchar(500) NOT NULL,
-	schedule_key int not null,
-	source_control_repo_key int null,
-	PRIMARY KEY (script_key)
-);
 
 
 -- DROP TABLE mgdw.ETL.script;
@@ -21,9 +12,7 @@ CREATE TABLE mgdw.ETL.script (
 	source_control_repo_key int null,
 	PRIMARY KEY (script_key)
 );
-SELECT TOP 3 name, collation_name FROM sys.databases
 select * from ETL.Script s 
-select TOP 3 Script_Key,Name from ETL.Script s 
 -- into Archive.Script_2022_07_28
 from ETL.script s order by script_key 
 -- delete from ETL.script where script_key = 8;
