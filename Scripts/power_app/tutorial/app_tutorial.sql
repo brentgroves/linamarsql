@@ -1,5 +1,7 @@
 Create Schema tutorial
 
+--Create Tables
+----------------------------------------------------------------------------
 -- DROP TABLE repsys1.tutorial.stock;
 CREATE TABLE repsys1.tutorial.stock (
 	id int IDENTITY(1,1) PRIMARY KEY,
@@ -37,3 +39,28 @@ VALUES
 (5,'2026-06-02',210.25,'Home Depot')
 
 SELECT * from repsys1.tutorial.orders; 
+
+----------------------------------------------------------------
+-- Get Orders SPROC
+----------------------------------------------------------------
+DECLARE @return_value INT;
+
+EXEC @return_value = tutorial.getOrders
+
+select 'return_value' = @return_value
+
+-- drop procedure tutorial.getOrders
+create procedure tutorial.getOrders
+as 
+BEGIN   
+--In SQL Server, SET NOCOUNT ON prevents the database from sending a message about the number of rows affected by a Transact-SQL statement (e.g., (1 row(s) affected)) back to the client.	
+	SET NOCOUNT ON; 
+	select t2.name as stockName,
+	t2.description as stockDescript,
+	t1.amount as orderedAmount,
+	t1.description as orderDescript,
+	t1.orderDate
+	from tutorial.orders t1
+	left join tutorial.stock t2
+	on t1.stockID=t2.id
+END; 
