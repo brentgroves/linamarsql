@@ -64,3 +64,91 @@ BEGIN
 	left join tutorial.stock t2
 	on t1.stockID=t2.id
 END; 
+
+
+----------------------------------------------------------------
+-- Get Stock SPROC
+	name varchar(255),
+	description varchar(255),
+	stockLevel int,
+
+----------------------------------------------------------------
+DECLARE @return_value INT;
+
+declare @id int;
+set @id = 1;
+
+EXEC @return_value = tutorial.getStock @id
+--EXEC @return_value = tutorial.getStock
+
+select 'return_value' = @return_value
+
+-- drop procedure tutorial.getStock
+create procedure tutorial.getStock
+(	
+	@id int = 0
+)
+as 
+BEGIN   
+--In SQL Server, SET NOCOUNT ON prevents the database from sending a message about the number of rows affected by a Transact-SQL statement (e.g., (1 row(s) affected)) back to the client.	
+	SET NOCOUNT ON; 
+    -- Case 1: All Stock
+    IF @id = 0
+    BEGIN
+		select s.name as stockName,
+			s.description as stockDescript,
+			s.stockLevel as stockLevel
+			from tutorial.stock s
+    END
+    -- All other Cases: 1 Item
+    ELSE 
+    BEGIN
+		select s.name as stockName,
+			s.description as stockDescript,
+			s.stockLevel as stockLevel
+			from tutorial.stock s
+			where s.id=@id
+    end
+END; 
+
+
+----------------------------------------------------------------
+-- Get Stock SPROC
+----------------------------------------------------------------
+DECLARE @return_value INT;
+
+declare @id int;
+set @id = 1;
+
+EXEC @return_value = tutorial.getStock @id
+--EXEC @return_value = tutorial.getStock
+
+select 'return_value' = @return_value
+
+-- drop procedure tutorial.getStock
+create procedure tutorial.getStock
+(	
+	@id int = 0
+)
+as 
+BEGIN   
+--In SQL Server, SET NOCOUNT ON prevents the database from sending a message about the number of rows affected by a Transact-SQL statement (e.g., (1 row(s) affected)) back to the client.	
+	SET NOCOUNT ON; 
+    -- Case 1: All Stock
+    IF @id = 0
+    BEGIN
+		select s.name as stockName,
+			s.description as stockDescript,
+			s.stockLevel as stockLevel
+			from tutorial.stock s
+    END
+    -- All other Cases: 1 Item
+    ELSE 
+    BEGIN
+		select s.name as stockName,
+			s.description as stockDescript,
+			s.stockLevel as stockLevel
+			from tutorial.stock s
+			where s.id=@id
+    end
+END; 
